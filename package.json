@@ -1,0 +1,18 @@
+{
+  "name": "cascading-markup",
+  "scripts": {
+    "start": "node .",
+    "build": "tsc",
+    "clean": "git clean -fXd -e \\!node_modules \\!node_modules/**"
+  },
+  "main": "src/index.js",
+  "eslintConfig": {
+    "extends": "@godismyjudgebro/eslint-config"
+  },
+  "prettier": "@godismyjudgebro/prettier-config",
+  "devDependencies": {
+    "@godismyjudgebro/eslint-config": "^1.6.0",
+    "@godismyjudgebro/prettier-config": "^1.0.0",
+    "typescript": "^4.8.4"
+  }
+}

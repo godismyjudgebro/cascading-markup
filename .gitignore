@@ -1,0 +1,18 @@
+# System files
+**/.DS_Store
+
+# Node
+**/node_modules
+
+# Cache
+**/.cache
+
+# TypeScript compiler output
+# Note: `[0-9]` combats duplicates made by cloud storage services (e.g. iCloud).
+**.js
+**.js.map
+**.js [0-9].map
+**.d.ts
+**.d [0-9].ts
+!**/test.js
+!**/*.test.js
