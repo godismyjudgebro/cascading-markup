@@ -1,9 +1,9 @@
-interface AttributePair {
+export interface AttributePair {
   name: string
   value: string
 }
 
-interface SourceLocation {
+export interface SourceLocation {
   readonly end: {
     readonly column: number
     readonly index: number
@@ -19,7 +19,7 @@ interface SourceLocation {
 
 export type AstNode = AstElementNode | AstTextNode
 
-interface AstTextNode {
+export interface AstTextNode {
   location: SourceLocation
   readonly name: 'text'
   parent: AstElementNode
@@ -27,7 +27,7 @@ interface AstTextNode {
   value: string
 }
 
-interface AstElementNode {
+export interface AstElementNode {
   attributes: AttributePair[]
   children: AstNode[]
   location: SourceLocation
@@ -39,6 +39,7 @@ interface AstElementNode {
 /**
  * Matches the opening and closing brackets of a block, and returns its content.
  *
+ * @internal
  * @param code - The code to parse the element from.
  * @param sliceIndex - The index to start parsing from.
  * @returns The index of the closing bracket.
