@@ -11,7 +11,7 @@
   },
   "prettier": "@godismyjudgebro/prettier-config",
   "devDependencies": {
-    "@godismyjudgebro/eslint-config": "^1.7.0",
+    "@godismyjudgebro/eslint-config": "^1.8.0",
     "@godismyjudgebro/prettier-config": "^1.0.0",
     "typescript": "^4.8.4"
   }
