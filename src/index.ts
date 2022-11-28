@@ -1,4 +1,4 @@
-import AstFileNode from './AstFileNode'
+import AstFileNode from './Ast/AstFileNode'
 
 const file = new AstFileNode(
   `
@@ -13,5 +13,4 @@ const file = new AstFileNode(
   'hello-world.cml'
 ).parse()
 
-console.log(file)
 console.log(file.outerHtml)
