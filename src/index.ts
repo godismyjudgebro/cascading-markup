@@ -1,18 +1,17 @@
-import parse from './parse'
-import stringify from './stringify'
+import AstFileNode from './AstFileNode'
 
-const syntaxTree = parse(`
-head title 'Hello World'
+const file = new AstFileNode(
+  `
+  html[lang=en] {
+    head title 'Hello World';
+    body {
+      h1 'Hello World!';
+      p 'This is a paragraph';
+    }
+  }
+  `,
+  'hello-world.cml'
+).parse()
 
-body {
-  h1 'Hello World!'
-  p 'This is a paragraph'
-}
-`)
-
-console.log(stringify(syntaxTree))
-
-export default {
-  parse,
-  stringify
-}
+console.log(file)
+console.log(file.outerHtml)
