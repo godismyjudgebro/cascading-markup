@@ -76,7 +76,15 @@ export default class AstElementNode extends AstGenericNode {
   // eslint-disable-next-line jsdoc/require-jsdoc
   public get outerHtml(): string {
     const attributes = this.attributes
-      .map(({ key, value }) => `${key}="${encode(value)}"`)
+      .map(({ key, value }) => {
+        const encodedValue = encode(value)
+
+        if (encodedValue.match(/[<>'"\s]/u)) {
+          return `${key}="${encodedValue}"`
+        }
+
+        return `${key}=${encodedValue}`
+      })
       .join(' ')
 
     const startTag = `<${`${this.name} ${attributes}`.trim()}>`
