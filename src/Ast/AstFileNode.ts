@@ -54,15 +54,18 @@ export default class AstFileNode extends AstGenericNode {
       i += this.source.code.slice(i).search(/\S|$/u)
 
       if (this.source.code[i] === ';') {
+        // End of statement. Move back to the scope of this node.
         scope = currentNode.scope
         currentNode = scope
         i++
         continue
       } else if (this.source.code[i] === '{') {
+        // Start of block. Set the scope to the current node.
         scope = currentNode
         i++
         continue
       } else if (this.source.code[i] === '}') {
+        // End of block. Move back to the scope of the parent node.
         // Todo(gimjb): Properly handle error.
 
         // This will error if the scope is the file scope.

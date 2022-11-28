@@ -77,15 +77,17 @@ export default class AstTextNode extends AstGenericNode {
       typeof wholeMatch === 'undefined' ||
       typeof stringContent === 'undefined'
     ) {
+      // No match found. Return null.
       return null
     }
 
-    // Interpret the node from the match groups.
+    // A match was found. Interpret the node from the match groups.
     const text = new AstTextNode(stringContent, parentNode, scope)
 
     // Accurately set the node's start and end indices in the source.
     text.source.updatePosition(startIndex, startIndex + wholeMatch.length)
 
+    // Return the node.
     return text
   }
 
@@ -96,6 +98,6 @@ export default class AstTextNode extends AstGenericNode {
    */
   // eslint-disable-next-line class-methods-use-this
   public override addChild(): this {
-    throw new Error('Text nodes cannot have children.')
+    throw new Error('Text nodes cannot have children')
   }
 }

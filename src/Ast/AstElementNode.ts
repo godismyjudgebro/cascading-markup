@@ -79,20 +79,26 @@ export default class AstElementNode extends AstGenericNode {
       .map(({ key, value }) => {
         const encodedValue = encode(value)
 
+        // Are the quotation marks necessary?
         if (encodedValue.match(/[<>'"\s]/u)) {
+          // Yes, so use double quotation marks.
           return `${key}="${encodedValue}"`
         }
 
+        // The quotation marks are not necessary here.
         return `${key}=${encodedValue}`
       })
       .join(' ')
 
     const startTag = `<${`${this.name} ${attributes}`.trim()}>`
 
+    // Is this a void element?
     if (this.children.length === 0 && voidElements.includes(this.name)) {
+      // Void elements do not have an end tag.
       return startTag
     }
 
+    // Non-void elements have an end tag.
     return `${startTag}${this.innerHtml}</${this.name}>`
   }
 
@@ -129,6 +135,7 @@ export default class AstElementNode extends AstGenericNode {
 
     // Was a match found?
     if (!matchGroups) {
+      // No, so return null.
       return null
     }
 
