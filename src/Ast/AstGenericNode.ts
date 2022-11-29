@@ -63,6 +63,7 @@ export default abstract class AstGenericNode {
     scope: AstGenericNode,
     startIndex: number
   ): AstGenericNode | null {
+    // Subclasses must override this method with its own implementation.
     throw new Error('Not implemented')
   }
 
