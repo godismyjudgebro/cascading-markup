@@ -82,6 +82,19 @@ export default class AstSource {
   }
 
   /**
+   * Calculate the index of a line number in the source code.
+   *
+   * @param line - The line number.
+   * @returns The index of the line number in the source code.
+   */
+  public indexFromLineNumber(line: number): number {
+    return (
+      this.code.match(new RegExp(`(?:[\\s\\S]*?\\n){${line - 1}}`, 'gu'))?.[0]
+        ?.length ?? this.code.length + 1
+    )
+  }
+
+  /**
    * Updates the position of the node in the source code.
    *
    * @param startIndex - The index of the first character of the node in the source code.
