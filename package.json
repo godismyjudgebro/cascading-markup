@@ -4,7 +4,8 @@
     "start": "node .",
     "test": "jest",
     "build": "tsc",
-    "clean": "git clean -fXd -e \\!node_modules \\!node_modules/**"
+    "clean": "git clean -fXd -e \\!node_modules \\!node_modules/**",
+    "lint": "eslint --ignore-pattern 'src/**/*.d.ts' 'src/**/*.ts'"
   },
   "main": "src/index.js",
   "eslintConfig": {
