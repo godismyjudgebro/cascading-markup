@@ -1,6 +1,6 @@
 /* eslint-disable no-unreachable */
 import AstGenericNode from './AstGenericNode'
-import encode from './encode'
+import encode from '../utils/encode'
 
 /** A text node, such as the *text content* of a hyperlink.  */
 export default class AstTextNode extends AstGenericNode {
