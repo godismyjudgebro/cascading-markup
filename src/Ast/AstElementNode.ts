@@ -1,6 +1,6 @@
 import type AstAttribute from './AstAttribute'
 import AstGenericNode from './AstGenericNode'
-import encode from './encode'
+import encode from '../utils/encode'
 
 const voidElements = [
   'area',
