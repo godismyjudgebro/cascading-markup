@@ -40,7 +40,7 @@ function parseAttributes(
   if (typeof classNames === 'string') {
     attributes.push({
       key: 'class',
-      value: classNames.split('.').join(' ').trim()
+      value: classNames.split('.').sort().join(' ').trim()
     })
   }
 
@@ -48,7 +48,7 @@ function parseAttributes(
     const matches = attributeSelector
       .slice(1, -1)
       .matchAll(
-        /(?<key>[^=\s]+)(?:=(?:(?<quotationMark>"|')(?<quotedValue>.*?)(?<![^\\]\\(?:\\\\)*\2)|(?<unquotedValue>\S+)))?/gu
+        /(?<key>[^=\s]+)(?:\s*=\s*(?:(?<quotationMark>"|')(?<quotedValue>.*?)(?<![^\\]\\(?:\\\\)*)\2|(?<unquotedValue>\S+)))?/gu
       )
     for (const match of matches) {
       attributes.push({
@@ -77,6 +77,13 @@ export default class AstElementNode extends AstGenericNode {
   public get outerHtml(): string {
     const attributes = this.attributes
       .map(({ key, value }) => {
+        // If the value is empty or a case-insensitive match to the key, then
+        // consider it a boolean attribute. In this case, we will represent the
+        // attribute in its short-hand form (`key`) instead of `key="value"`.
+        if (value === '' || value.toLowerCase() === key.toLowerCase()) {
+          return key
+        }
+
         const encodedValue = encode(value)
 
         // Are the quotation marks necessary?
