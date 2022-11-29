@@ -21,7 +21,7 @@ export default abstract class AstGenericNode {
   public readonly source: AstSource
 
   /** The type of the node. */
-  public abstract type: 'Comment' | 'Element' | 'File' | 'Text'
+  public abstract type: 'Block' | 'Comment' | 'Element' | 'File' | 'Text'
 
   /** The HTML representation of this node's content/children. */
   public abstract get innerHtml(): string

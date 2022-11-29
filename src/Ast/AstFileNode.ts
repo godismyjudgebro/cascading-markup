@@ -1,3 +1,4 @@
+import AstBlockNode from './AstBlockNode'
 import AstElementNode from './AstElementNode'
 import AstGenericNode from './AstGenericNode'
 import AstSource from './AstSource'
@@ -61,15 +62,17 @@ export default class AstFileNode extends AstGenericNode {
         continue
       } else if (this.source.code[i] === '{') {
         // Start of block. Set the scope to the current node.
-        scope = currentNode
+        scope = new AstBlockNode(currentNode)
+        currentNode.addChild(scope)
+        currentNode = scope
         i++
         continue
       } else if (this.source.code[i] === '}') {
         // End of block. Move back to the scope of the parent node.
-        // Todo(gimjb): Properly handle error.
+        // Todo(gimjb): Error if the scope is the file node.
 
-        // This will error if the scope is the file scope.
-        scope = currentNode.parent!.scope
+        scope = currentNode.scope.parent?.scope ?? currentNode.scope
+        currentNode = scope
         i++
         continue
       }

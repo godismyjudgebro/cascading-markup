@@ -21,6 +21,16 @@ const voidElements = [
 ]
 
 /**
+ * Sort attributes by key.
+ *
+ * @param attributes - Attributes to sort.
+ * @returns Sorted attributes.
+ */
+function sortAttributes(attributes: AstAttribute[]): AstAttribute[] {
+  return attributes.sort((a, b) => a.key.localeCompare(b.key))
+}
+
+/**
  * Extracts the attributes from an attribute specifier.
  *
  * @param id - The element ID attribute.
@@ -59,7 +69,7 @@ function parseAttributes(
     }
   }
 
-  return attributes.sort((a, b) => a.key.localeCompare(b.key))
+  return sortAttributes(attributes)
 }
 
 /** An element node, such as a `div` or `span`.  */
@@ -87,7 +97,7 @@ export default class AstElementNode extends AstGenericNode {
         const encodedValue = encode(value)
 
         // Are the quotation marks necessary?
-        if (encodedValue.match(/[<>'"\s]/u)) {
+        if (encodedValue.match(/[<>'"=\s]/u)) {
           // Yes, so use double quotation marks.
           return `${key}="${encodedValue}"`
         }
@@ -124,7 +134,7 @@ export default class AstElementNode extends AstGenericNode {
     attributes: AstAttribute[] = []
   ) {
     super(tagName, parentNode, scope)
-    this.attributes = attributes
+    this.attributes = sortAttributes(attributes)
   }
 
   // eslint-disable-next-line jsdoc/require-jsdoc
@@ -137,7 +147,7 @@ export default class AstElementNode extends AstGenericNode {
     const matchGroups = parentNode.source.code
       .slice(startIndex)
       .match(
-        /^(?=[^\s{])(?<selector>(?<tagName>(?:(?![#.[\]{};])\S)+)?(?<id>#(?:(?![#.[\]{};])\S)+)?(?<classNames>(?:\.(?:(?![#.[\]{};])\S)+)+)?(?<attributeSelector>(?:\[(?:(?<string>(?<quotationMark>"|').*?(?<![^\\]\\(?:\\\\)*)\7)|.)*?\]))?)/u
+        /^(?=[^\s{])(?<selector>(?<tagName>(?:(?![#.[\]{};])\S)+)?(?:#(?<id>(?:(?![#.[\]{};])\S)+))?(?<classNames>(?:\.(?:(?![#.[\]{};])\S)+)+)?(?<attributeSelector>(?:\[(?:(?<string>(?<quotationMark>"|').*?(?<![^\\]\\(?:\\\\)*)\7)|.)*?\]))?)/u
       )?.groups
 
     // Was a match found?

@@ -2,6 +2,7 @@
   "name": "cascading-markup",
   "scripts": {
     "start": "node .",
+    "test": "jest",
     "build": "tsc",
     "clean": "git clean -fXd -e \\!node_modules \\!node_modules/**"
   },
@@ -13,6 +14,7 @@
   "devDependencies": {
     "@godismyjudgebro/eslint-config": "^1.8.0",
     "@godismyjudgebro/prettier-config": "^1.0.0",
+    "jest": "^29.3.1",
     "typescript": "^4.8.4"
   }
 }

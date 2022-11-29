@@ -91,7 +91,7 @@ export default class AstSource {
    * @throws If `startIndex` is less than zero.
    * @throws If `endIndex` is greater than the code length.
    */
-  public updatePosition(startIndex: number, endIndex: number): SourcePosition {
+  public updatePosition(startIndex: number, endIndex: number): this {
     if (startIndex > endIndex) {
       throw new Error('endIndex must be greater or equal to than startIndex.')
     } else if (startIndex < 0) {
@@ -117,6 +117,6 @@ export default class AstSource {
       }
     }
 
-    return this._position
+    return this
   }
 }

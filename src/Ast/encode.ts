@@ -5,9 +5,18 @@
  * @returns The encoded text.
  */
 export default function encode(text: string): string {
-  return text
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('&', '&amp;')
-    .replaceAll('"', '&quot;')
+  return text.replace(/[<>&"]/gu, match => {
+    switch (match) {
+      case '<':
+        return '&lt;'
+      case '>':
+        return '&gt;'
+      case '&':
+        return '&amp;'
+      case '"':
+        return '&quot;'
+      default:
+        return match
+    }
+  })
 }
